@@ -15,6 +15,7 @@ import 'UserAuthScreen/login_screen.dart';
 import 'localization/locale_constants.dart';
 import 'localization/localizations_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+//NovelFlex
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
