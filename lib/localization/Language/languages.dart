@@ -13,6 +13,12 @@ abstract class Languages {
 
   String get appName;
 
+  String get continueWith;
+
+  String get resetPasswordtxt;
+
+  String get resetPasswordtxt2;
+
   String get labelWelcome;
 
   String get labelInfo;
@@ -100,6 +106,8 @@ abstract class Languages {
 
   String get login;
 
+  String get newPasswordCreate;
+
   String get forgetPassword;
 
   String get donthaveanaccountSignUp;
@@ -112,6 +120,10 @@ abstract class Languages {
 
   String get register;
 
+  String get iamWriter;
+
+  String get iamreader;
+
   String get alreadyhaveAccountSignIn;
 
   String get welcomenovelflex;
@@ -121,6 +133,8 @@ abstract class Languages {
   String get socailtext;
 
   String get createAccount;
+
+  String get selectAccountType;
 
   String get dialogAreyousure;
 

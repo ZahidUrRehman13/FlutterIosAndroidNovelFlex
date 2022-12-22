@@ -11,13 +11,28 @@ class LanguageEn extends Languages {
   String get level => "LEVEL";
 
   @override
+  String get newPasswordCreate => "Create new password";
+
+  @override
+  String get selectAccountType => "Select Account type";
+
+
+  @override
+  String get resetPasswordtxt => "let's reset your password";
+  @override
+  String get resetPasswordtxt2 => "Enter the email associated with your accountand we'll send an email with instructions to reset your password.";
+
+  @override
+  String get continueWith =>  "Or continue with";
+
+  @override
   String get subscriber => "SUBSCRIBERS";
 
   @override
   String get authorC => "Publish Books";
 
   @override
-  String get labelWelcome => "Welcome";
+  String get labelWelcome => "Welcome to NovelFlex\n a heaven of books!";
 
   @override
   String get labelSelectLanguage => "  English";
@@ -193,7 +208,15 @@ class LanguageEn extends Languages {
 
   @override
   // TODO: implement register
-  String get register => "Register";
+  String get register => "Continue";
+
+  @override
+  // TODO: implement password
+  String get iamreader => "I am a Reader";
+
+  @override
+  // TODO: implement register
+  String get iamWriter => "I am a Writer";
 
   @override
   // TODO: implement signup

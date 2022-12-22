@@ -5,7 +5,21 @@ class LanguageAr extends Languages {
   String get appName => "متعدد اللغات";
 
   @override
-  String get labelWelcome => "أهلا وسهلا";
+  String get labelWelcome => "مرحبًا بكم في رواية\n جنة من الكتب!";
+
+  @override
+  String get continueWith =>  "أو تواصل مع";
+
+  @override
+  String get selectAccountType => "حدد نوع الحساب";
+
+  @override
+  String get newPasswordCreate => "أنشئ كلمة مرور جديدة";
+
+  @override
+  String get resetPasswordtxt => "دعنا نعيد تعيين كلمة المرور الخاصة بك";
+  @override
+  String get resetPasswordtxt2 => "أدخل البريد الإلكتروني المرتبط بحسابك وسنرسل بريدًا إلكترونيًا يحتوي على إرشادات لإعادة تعيين كلمة المرور الخاصة بك.";
 
   @override
   String get follow => "الإشتراك";
@@ -196,7 +210,15 @@ class LanguageAr extends Languages {
 
   @override
   // TODO: implement register
-  String get register => "يسجل";
+  String get register => "استمر";
+
+  @override
+  // TODO: implement password
+  String get iamreader => "أنا قارئ";
+
+  @override
+  // TODO: implement register
+  String get iamWriter => "أنا الكاتب";
 
   @override
   // TODO: implement signup
