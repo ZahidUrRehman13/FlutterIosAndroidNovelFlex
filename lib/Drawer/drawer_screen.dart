@@ -1,13 +1,11 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:provider/provider.dart';
-import 'package:rating_dialog/rating_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../MixScreens/MyWalletScreen.dart';
 import '../MixScreens/disclimar_screen.dart';
 import '../Models/language_model.dart';
 import '../Provider/UserProvider.dart';
@@ -49,15 +47,15 @@ class _DrawerCodeState extends State<DrawerCode> {
               SizedBox(
                 height: _height * 0.2,
                 child: DrawerHeader(
-                  decoration: const BoxDecoration(color: Colors.white),
+                  decoration: BoxDecoration(color: Colors.white),
                   child: Column(
                     children: <Widget>[
                       Expanded(
                         child: Container(
                           width: 100,
                           height: 100,
-                          margin: const EdgeInsets.only(bottom: 5),
-                          decoration: const BoxDecoration(
+                          margin: EdgeInsets.only(bottom: 5),
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 image: AssetImage('assets/icon_whitout_pg.png'),
@@ -85,8 +83,6 @@ class _DrawerCodeState extends State<DrawerCode> {
                           children: [
                             Container(
                               color: Colors.white,
-                              height: _height * 0.18,
-                              width: _width * 0.3,
                               child: CircleAvatar(
                                 backgroundColor: Colors.black12,
                                 backgroundImage: Provider.of<UserProvider>(context,
@@ -97,12 +93,14 @@ class _DrawerCodeState extends State<DrawerCode> {
                                       listen: false)
                                       .UserImage!,
 
-                                ): const AssetImage('assets/profile_pic.png') as ImageProvider,
+                                ): AssetImage('assets/profile_pic.png') as ImageProvider,
 
                               ),
+                              height: _height * 0.18,
+                              width: _width * 0.3,
                             ),
                             Container(
-                              margin: const EdgeInsets.only(left: 8),
+                              margin: EdgeInsets.only(left: 8),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -113,14 +111,14 @@ class _DrawerCodeState extends State<DrawerCode> {
                                         .UserName!),
                                     textAlign: TextAlign.start,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: Constants.fontfamily,
                                       color: Colors.black,
                                     ),
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     height: 6.0,
                                   ),
                                   Text(
@@ -129,7 +127,7 @@ class _DrawerCodeState extends State<DrawerCode> {
                                         .UserEmail!,
                                     textAlign: TextAlign.start,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 12.0,
                                         fontWeight: FontWeight.w400,
                                         fontFamily: Constants.fontfamily,
@@ -145,13 +143,13 @@ class _DrawerCodeState extends State<DrawerCode> {
                   ),
                 ),
               ),
-              const Divider(),
+              Divider(),
               Card(
-                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 elevation: 0.0,
                 child: ListTile(
-                  leading: const Icon(Icons.home),
-                  title: Text(Languages.of(context)!.home,style: const TextStyle( fontFamily: Constants.fontfamily,),),
+                  leading: Icon(Icons.home),
+                  title: Text(Languages.of(context)!.home,style: TextStyle( fontFamily: Constants.fontfamily,),),
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -159,10 +157,10 @@ class _DrawerCodeState extends State<DrawerCode> {
               ),
               Card(
                 elevation: 0.0,
-                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: ListTile(
-                  leading: const Icon(Icons.star_border_rounded),
-                  title: Text(Languages.of(context)!.rate_Us,style: const TextStyle( fontFamily: Constants.fontfamily,),),
+                  leading: Icon(Icons.star_border_rounded),
+                  title: Text(Languages.of(context)!.rate_Us,style: TextStyle( fontFamily: Constants.fontfamily,),),
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -170,10 +168,10 @@ class _DrawerCodeState extends State<DrawerCode> {
               ),
               Card(
                 elevation: 0.0,
-                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: ListTile(
-                  leading: const Icon(Icons.mail_lock_outlined),
-                  title: Text(Languages.of(context)!.ContactUs,style: const TextStyle( fontFamily: Constants.fontfamily,),),
+                  leading: Icon(Icons.mail_lock_outlined),
+                  title: Text(Languages.of(context)!.ContactUs,style: TextStyle( fontFamily: Constants.fontfamily,),),
                   onTap: () {
                     _sendingMails();
                     Navigator.pop(context);
@@ -186,10 +184,27 @@ class _DrawerCodeState extends State<DrawerCode> {
               ),
               Card(
                 elevation: 0.0,
-                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: ListTile(
-                  leading: const Icon(Icons.back_hand_outlined),
-                  title: Text(Languages.of(context)!.Disclaimer,style: const TextStyle( fontFamily: Constants.fontfamily,),),
+                  leading: Icon(Icons.attach_money_rounded,),
+                  title: Text(Languages.of(context)!.myWallet,style: TextStyle( fontFamily: Constants.fontfamily,),),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyWalletScreen()));
+
+
+                  },
+                ),
+              ),
+              Card(
+                elevation: 0.0,
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
+                child: ListTile(
+                  leading: Icon(Icons.back_hand_outlined),
+                  title: Text(Languages.of(context)!.Disclaimer,style: TextStyle( fontFamily: Constants.fontfamily,),),
                   onTap: () {
                     Navigator.pop(context);
                     Navigator.push(
@@ -201,10 +216,10 @@ class _DrawerCodeState extends State<DrawerCode> {
               ),
               Card(
                 elevation: 0.0,
-                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: ListTile(
-                  leading: const Icon(Icons.login),
-                  title: Text(Languages.of(context)!.LogOut,style: const TextStyle( fontFamily: Constants.fontfamily,),),
+                  leading: Icon(Icons.login),
+                  title: Text(Languages.of(context)!.LogOut,style: TextStyle( fontFamily: Constants.fontfamily,),),
                   onTap: () {
                     // Navigator.pop(context);
                     showDialog();
@@ -215,10 +230,10 @@ class _DrawerCodeState extends State<DrawerCode> {
               ),
               Card(
                 elevation: 0.0,
-                margin: const EdgeInsets.only(left: 10.0, right: 10.0),
+                margin: EdgeInsets.only(left: 10.0, right: 10.0),
                 child: ListTile(
-                  leading: const Icon(Icons.delete,),
-                  title: Text(Languages.of(context)!.DeleteAccount,style: const TextStyle( fontFamily: Constants.fontfamily,),),
+                  leading: Icon(Icons.delete,),
+                  title: Text(Languages.of(context)!.DeleteAccount,style: TextStyle( fontFamily: Constants.fontfamily,),),
                   onTap: () {
                     // Navigator.pop(context);
                     showDeleteDialog();
@@ -282,7 +297,7 @@ class _DrawerCodeState extends State<DrawerCode> {
                   children: <Widget>[
                     Text(
                       e.flag,
-                      style: const TextStyle(fontSize: 30),
+                      style: TextStyle(fontSize: 30),
                     ),
                     Text(e.name)
                   ],
@@ -299,15 +314,15 @@ class _DrawerCodeState extends State<DrawerCode> {
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: Text(Languages.of(context)!.alert,style: const TextStyle(
+          title: Text(Languages.of(context)!.alert,style: TextStyle(
               fontFamily: Constants.fontfamily
           ),),
-          content: Text(Languages.of(context)!.dialogAreyousure,style: const TextStyle(
+          content: Text(Languages.of(context)!.dialogAreyousure,style: TextStyle(
             fontFamily: Constants.fontfamily
           ),),
           actions: [
             CupertinoDialogAction(
-                child: Text(Languages.of(context)!.yes,style: const TextStyle(
+                child: Text(Languages.of(context)!.yes,style: TextStyle(
                     fontFamily: Constants.fontfamily
                 ),),
                 onPressed: ()
@@ -323,7 +338,7 @@ class _DrawerCodeState extends State<DrawerCode> {
                 }
             ),
             CupertinoDialogAction(
-              child: Text(Languages.of(context)!.no,style: const TextStyle(
+              child: Text(Languages.of(context)!.no,style: TextStyle(
                   fontFamily: Constants.fontfamily
               ),),
               onPressed: (){
@@ -342,15 +357,15 @@ class _DrawerCodeState extends State<DrawerCode> {
       context: context,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: Text(Languages.of(context)!.DeleteAccount,style: const TextStyle(
+          title: Text(Languages.of(context)!.DeleteAccount,style: TextStyle(
               fontFamily: Constants.fontfamily
           ),),
-          content: Text(Languages.of(context)!.deleteAccountText,style: const TextStyle(
+          content: Text(Languages.of(context)!.deleteAccountText,style: TextStyle(
               fontFamily: Constants.fontfamily
           ),),
           actions: [
             CupertinoDialogAction(
-                child: Text(Languages.of(context)!.yes,style: const TextStyle(
+                child: Text(Languages.of(context)!.yes,style: TextStyle(
                     fontFamily: Constants.fontfamily
                 ),),
                 onPressed: ()
@@ -366,7 +381,7 @@ class _DrawerCodeState extends State<DrawerCode> {
                 }
             ),
             CupertinoDialogAction(
-              child: Text(Languages.of(context)!.no,style: const TextStyle(
+              child: Text(Languages.of(context)!.no,style: TextStyle(
                   fontFamily: Constants.fontfamily
               ),),
               onPressed: (){

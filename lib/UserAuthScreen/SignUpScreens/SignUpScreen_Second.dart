@@ -414,9 +414,8 @@ class _SignUpScreen_SecondState extends State<SignUpScreen_Second> {
                           // setState(() {
                           //   _isLoading=true;
                           // });
-                          // handleRegisterUser();
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                          SingUpScreen_Third()));
+                          handleRegisterUser();
+
                         },
                         buttonname: Languages.of(context)!.register,
                       ),
@@ -529,15 +528,14 @@ class _SignUpScreen_SecondState extends State<SignUpScreen_Second> {
   void handleRegisterUser() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     if (_formKey.currentState!.validate()) {
-//    If all data are correct then save data to out variables
       _formKey.currentState!.save();
-      //Call api
-      // _checkInternetConnection();\
-      // Navigator.pop(context);
-      // Navigator.push(context, MaterialPageRoute(builder: (context)=>TabScreen()));
-      _checkInternetConnection();
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>
+          SingUpScreen_Third(
+            name: _controllerFullName!.text.toString(),
+            email: _controllerEmail!.text.toString(),
+            password: _controllerPassword!.text.toString(),
+          )));
     } else {
-//    If all data are not valid then start auto validation.
       setState(() {
         _autoValidate = true;
       });

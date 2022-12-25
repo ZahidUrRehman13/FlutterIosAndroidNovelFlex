@@ -210,6 +210,116 @@ class _HomeScreenState extends State<HomeScreen> {
                   visible: Provider.of<InternetConnectionStatus>(context) ==
                       InternetConnectionStatus.disconnected,
                   child: Constants.InternetNotConnected(_height * 0.03)),
+              Container(
+                height: _height*0.26,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                      autoPlay: false
+                    ),
+                    items:  _dashBoardModelMain!
+                        .data![0].books!.map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                              decoration: BoxDecoration(
+                                  color: Color(0xffebf5f9),
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: _width*0.02,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text(
+                                          "Most Popular",
+                                          style: const TextStyle(
+                                              color:  const Color(0xff2a2a2a),
+                                              fontWeight: FontWeight.w700,
+                                              fontFamily: "Alexandria",
+                                              fontStyle:  FontStyle.normal,
+                                              fontSize: 16.0
+                                          ),
+
+                                      ),
+                                      Container(
+                                        width: _width*0.25,
+                                        height: _height*0.15,
+                                        child:ClipRRect(
+                                          borderRadius: BorderRadius.circular(20),
+                                          child: Image(
+                                            image: NetworkImage(
+                                                _dashBoardModelMain!
+                                                    .data![0].books![1].bookImage.toString()),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox()
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        SizedBox(),
+                                        SizedBox(),
+                                        SizedBox(),
+                                        SizedBox(),
+                                        Text(
+                                            "Novel Title",
+                                            style: const TextStyle(
+                                                color:  const Color(0xff2a2a2a),
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Alexandria",
+                                                fontStyle:  FontStyle.normal,
+                                                fontSize: 14.0
+                                            ),
+
+                                        ),
+                                        Text(
+                                            "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut arcu libero, pulvinar non massa sed, accumsan scelerisque dui. Morbi purus mauris, vulputate quis felis nec, fermentum aliquam orci. Quisque ornare iaculis placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In commodo sem arcu, sed fermentum tortor consequat vel. Phasellus lacinia quam quis leo tincidunt vehicula.",
+                                            style: const TextStyle(
+                                                color:  const Color(0xff676767),
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: "Lato",
+                                                fontStyle:  FontStyle.normal,
+                                                fontSize: 12.0
+                                            ),
+
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 5,
+                                        ),
+                                        Text(
+                                            "#Manga",
+                                            style: const TextStyle(
+                                                color:  const Color(0xff3a6c83),
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: "Lato",
+                                                fontStyle:  FontStyle.normal,
+                                                fontSize: 12.0
+                                            ),
+
+                                        ),
+                                        SizedBox(),
+                                        SizedBox(),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )
+                          );
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
               Expanded(
                 child: Scaffold(
                   body: RefreshIndicator(
@@ -230,16 +340,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  // FutureBuilder<String>(
-                                  //     future: _ChangeLanguage(),
-                                  //     builder: (context,
-                                  //         AsyncSnapshot<String> snapshot) {
-                                  //       if (snapshot.hasData) {
-                                  //         return Text(snapshot.data.toString());
-                                  //       } else {
-                                  //         return CircularProgressIndicator();
-                                  //       }
-                                  //     }),
                                   Text(
                                     context
                                                     .read<UserProvider>()
@@ -282,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             SizedBox(
-                              height: _height*0.28,
+                              height: _height*0.23,
                               child: ListView.builder(
                                 physics: const BouncingScrollPhysics(),
                                 itemCount: _dashBoardModelMain!
@@ -300,55 +400,70 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     _dashBoardModelMain!.data![index].books![index1].id!,
                                                   )));
                                     },
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          width: _width*0.45,
-                                          margin: const EdgeInsets.all(3.0),
-
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5.0),
-                                            child: CachedNetworkImage(
-                                              imageUrl:
-                                              _dashBoardModelMain!
-                                                  .data![index]
-                                                  .books![index1]
-                                                  .bookImage!,
-                                              fit: BoxFit.contain,
-                                              placeholder: (context,
-                                                  url) =>
-                                                  const Center(
-                                                      child:
-                                                      CupertinoActivityIndicator(
-                                                        color: Color(0xFF256D85),
-                                                      )),
-                                              errorWidget:
-                                                  (context, url, error) =>
-                                                  const Center(child: Icon(Icons.error_outline)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            // width: _width*0.45,
+                                            margin: const EdgeInsets.all(3.0),
+                                            width: _width*0.27,
+                                            height: _height*0.15,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff3a6c83),
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(20),
+                                              child: CachedNetworkImage(
+                                                filterQuality: FilterQuality.high,
+                                                imageUrl:
+                                                _dashBoardModelMain!
+                                                    .data![index]
+                                                    .books![index1]
+                                                    .bookImage!,
+                                                fit: BoxFit.cover,
+                                                placeholder: (context,
+                                                    url) =>
+                                                    const Center(
+                                                        child:
+                                                        CupertinoActivityIndicator(
+                                                          color: Color(0xFF256D85),
+                                                        )),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                    const Center(child: Icon(Icons.error_outline)),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Positioned(
-                                            top: _height * 0.22,
-                                            left: _width * 0.08,
-                                            right: _width * 0.06,
-                                            child: Text(
-                                              _dashBoardModelMain!
-                                                  .data![index]
-                                                  .books![index1]
-                                                  .bookTitle!,
-                                              overflow:
-                                              TextOverflow.ellipsis,
+                                          Text(
+                                            _dashBoardModelMain!
+                                                .data![index]
+                                                .books![index1]
+                                                .bookTitle!,
+                                            overflow:
+                                            TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                                color:  const Color(0xff2a2a2a),
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Alexandria",
+                                                fontStyle:  FontStyle.normal,
+                                                fontSize: 10.0
+                                            ),
+                                          ),
+                                          Text(
+                                              "Randy Woodkin",
                                               style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight:
-                                                FontWeight.bold,
-                                                fontFamily:
-                                                Constants.fontfamily,
+                                                  color:  const Color(0xff676767),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: "Lato",
+                                                  fontStyle:  FontStyle.normal,
+                                                  fontSize: 8.0
                                               ),
-                                            ))
-                                      ],
+                                              textAlign: TextAlign.left
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
@@ -437,32 +552,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               //         ),
                               //       );
                               //     }),
-                            )
-                            // CarouselSlider(
-                            //   options: CarouselOptions(height: 400.0),
-                            //   items:  _dashBoardModelMain!
-                            //       .data![index].books!.map((i) {
-                            //     return Builder(
-                            //       builder: (BuildContext context) {
-                            //         return Container(
-                            //             width: MediaQuery.of(context).size.width,
-                            //             margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            //             decoration: BoxDecoration(
-                            //                 color: Colors.amber
-                            //             ),
-                            //             child: Container(
-                            //               decoration: BoxDecoration(
-                            //                 image: DecorationImage(
-                            //                   image: NetworkImage( _dashBoardModelMain!
-                            //                       .data![index].books!.bookImage.toString())
-                            //                 )
-                            //               ),
-                            //             )
-                            //         );
-                            //       },
-                            //     );
-                            //   }).toList(),
-                            // )
+                            ),
+
                           ],
                         );
                       },

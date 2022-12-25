@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:novelflex/UserAuthScreen/SignUpScreens/signUpScreen_Author.dart';
 
 import '../../Widgets/reusable_button_small.dart';
 import '../../localization/Language/languages.dart';
 
 class SingUpScreen_Third extends StatefulWidget {
-  const SingUpScreen_Third({Key? key}) : super(key: key);
+  String name;
+  String email;
+  String password;
+
+  SingUpScreen_Third({required this.name,required this.email,required this.password});
 
   @override
   State<SingUpScreen_Third> createState() => _SingUpScreen_ThirdState();
@@ -31,7 +36,7 @@ class _SingUpScreen_ThirdState extends State<SingUpScreen_Third> {
 
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back,size: _height*0.03,color: Colors.black54,)),
+            icon: Icon(Icons.arrow_back_ios,size: _height*0.03,color: Colors.black54,)),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -161,8 +166,18 @@ class _SingUpScreen_ThirdState extends State<SingUpScreen_Third> {
             ),
             child: ResuableMaterialButtonSmall(
               onpress: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                //     SingUpScreen_2()));
+                if(isWriter){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                      SignUpAuthorScreen(
+                        name: widget.name,
+                        email: widget.email,
+                        password: widget.password,
+                        status: "",
+                      )));
+                }else{
+                  //signUp call api
+                }
+
               },
               buttonname: Languages.of(context)!.register,
             ),

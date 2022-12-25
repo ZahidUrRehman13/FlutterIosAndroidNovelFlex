@@ -211,8 +211,24 @@ class LanguageEn extends Languages {
   String get register => "Continue";
 
   @override
+  // TODO: implement register
+  String get myWallet => "My Wallet";
+
+  @override
+  // TODO: implement register
+  String get bioHint => "About you...";
+
+  @override
+  // TODO: implement register
+  String get selectPicture => "Select Picture";
+
+  @override
   // TODO: implement password
   String get iamreader => "I am a Reader";
+
+  @override
+  // TODO: implement password
+  String get letsReaderKnowYuBetter => "Let Readers know you better!";
 
   @override
   // TODO: implement register

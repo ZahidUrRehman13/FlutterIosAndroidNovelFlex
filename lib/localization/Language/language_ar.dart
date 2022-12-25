@@ -213,6 +213,22 @@ class LanguageAr extends Languages {
   String get register => "استمر";
 
   @override
+  // TODO: implement register
+  String get selectPicture => "حدد صورة";
+
+  @override
+  // TODO: implement register
+  String get myWallet => "محفظتى";
+
+  @override
+  // TODO: implement register
+  String get bioHint => "حولك...";
+
+  @override
+  // TODO: implement password
+  String get letsReaderKnowYuBetter => "دع القراء يعرفونك بشكل أفضل!";
+
+  @override
   // TODO: implement password
   String get iamreader => "أنا قارئ";
 

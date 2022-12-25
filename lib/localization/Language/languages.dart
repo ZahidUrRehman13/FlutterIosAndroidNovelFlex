@@ -132,11 +132,20 @@ abstract class Languages {
 
   String get socailtext;
 
+  String get bioHint;
+
+  String get myWallet;
+
+
   String get createAccount;
 
   String get selectAccountType;
 
+  String get letsReaderKnowYuBetter;
+
   String get dialogAreyousure;
+
+  String get selectPicture;
 
   String get deleteAccountText;
 
