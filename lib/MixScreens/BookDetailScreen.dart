@@ -187,8 +187,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     ),
                   )
                 : Container(
+          height: _height*0.7,
           decoration: BoxDecoration(
-            color: const Color(0xFF256D85),
+            color:  Colors.white,
             image: DecorationImage(
                 image: NetworkImage(
                   _bookDetailsModel!.data!.bookImage!,
@@ -198,6 +199,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             ),
           ),
              child: ListView(
+               physics: ClampingScrollPhysics(),
              children: [
               Column(
                 mainAxisSize: MainAxisSize.min,
@@ -227,63 +229,28 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                               .toString(),
                                         )));
                           },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          child: Column(
+                            crossAxisAlignment:
+                            CrossAxisAlignment.end,
                             children: [
-                              Padding(
-                                padding:  EdgeInsets.only(left: _width*0.13,right: 12,),
-                                child: GestureDetector(
-                                  onTap: (){
-                                    _callSubscribeAPI();
-                                  },
-                                  child: Container(
-                                    width: _width*0.25,
-                                    height: _height*0.04,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      color: const Color(0xFF256D85),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        Languages.of(context)!
-                                            .follow,
-                                          style: const TextStyle(
-                                            fontFamily: 'Lato',
-                                            fontSize: 20,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w700,
-                                            fontStyle: FontStyle.normal,
 
-                                          )
-                                      ),
-                                    ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  Languages.of(context)!
+                                      .seeAllReviews,
+                                  style: const TextStyle(
+                                    color: Color(0xFF256D85),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    fontFamily:
+                                    Constants.fontfamily,
                                   ),
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.end,
-                                children: [
-
-                                  Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Text(
-                                      Languages.of(context)!
-                                          .seeAllReviews,
-                                      style: const TextStyle(
-                                        color: Color(0xFF256D85),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        fontFamily:
-                                        Constants.fontfamily,
-                                      ),
-                                    ),
-                                  ),
-                                  const Divider(
-                                    color: Colors.black,
-                                  )
-                                ],
-                              ),
+                              const Divider(
+                                color: Colors.black,
+                              )
                             ],
                           ),
                         ),

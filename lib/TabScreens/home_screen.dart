@@ -16,6 +16,7 @@ import 'package:new_version_plus/new_version_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:translator/translator.dart';
 import '../Drawer/drawer_screen.dart';
+import '../MixScreens/AuthorViewByUserScreen.dart';
 import '../MixScreens/BookDetailScreen.dart';
 import '../MixScreens/SeeAllBooksScreen.dart';
 import '../MixScreens/notification_screen.dart';
@@ -391,14 +392,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 itemBuilder: (context, index1) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BookDetailScreen(
-                                                    BookID:
-                                                    _dashBoardModelMain!.data![index].books![index1].id!,
-                                                  )));
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             BookDetailScreen(
+                                      //               BookID:
+                                      //               _dashBoardModelMain!.data![index].books![index1].id!,
+                                      //             )));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                      AuthorViewByUserScreen()));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),

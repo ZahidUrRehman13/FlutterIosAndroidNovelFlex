@@ -206,6 +206,23 @@ class LanguageEn extends Languages {
   // TODO: implement password
   String get password => "Password";
 
+
+  @override
+  // TODO: implement register
+  String get saved => "Saved";
+
+  @override
+  // TODO: implement register
+  String get novels => "Novels";
+
+  @override
+  // TODO: implement register
+  String get liked => "Liked";
+
+  @override
+  // TODO: implement register
+  String get history => "My History";
+
   @override
   // TODO: implement register
   String get register => "Continue";
@@ -213,6 +230,10 @@ class LanguageEn extends Languages {
   @override
   // TODO: implement register
   String get myWallet => "My Wallet";
+
+  @override
+  // TODO: implement register
+  String get myCorner => "My Corner";
 
   @override
   // TODO: implement register

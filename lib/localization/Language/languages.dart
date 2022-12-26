@@ -39,6 +39,8 @@ abstract class Languages {
 
   String get seeAll;
 
+  String get novels;
+
   String get terms;
 
   String get agree;
@@ -136,6 +138,13 @@ abstract class Languages {
 
   String get myWallet;
 
+  String get myCorner;
+
+  String get saved;
+
+  String get liked;
+
+  String get history;
 
   String get createAccount;
 

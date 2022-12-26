@@ -214,6 +214,26 @@ class LanguageAr extends Languages {
 
   @override
   // TODO: implement register
+  String get myCorner => "ركني";
+
+  @override
+  // TODO: implement register
+  String get saved => "تم الحفظ";
+
+  @override
+  // TODO: implement register
+  String get novels => "روايات";
+
+  @override
+  // TODO: implement register
+  String get liked => "احب";
+
+  @override
+  // TODO: implement register
+  String get history => "تاريخي";
+
+  @override
+  // TODO: implement register
   String get selectPicture => "حدد صورة";
 
   @override
