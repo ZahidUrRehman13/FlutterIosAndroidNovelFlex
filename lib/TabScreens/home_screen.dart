@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xffebf5f9),
       key: globalKey,
       appBar: AppBar(
         elevation: 0.2,
@@ -253,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         width: _width*0.25,
                                         height: _height*0.15,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius: BorderRadius.circular(10),
                                           image: DecorationImage(
                                             image: NetworkImage(_dashBoardModelMain!
                                                 .data![2].books![0].bookImage.toString(),
@@ -434,30 +434,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: _width*0.27,
                                             height: _height*0.15,
                                             decoration: BoxDecoration(
-                                              color: Color(0xff3a6c83),
+                                              // color: Color(0xff3a6c83),
                                               borderRadius: BorderRadius.circular(20),
                                             ),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(20),
-                                              child: CachedNetworkImage(
-                                                filterQuality: FilterQuality.high,
-                                                imageUrl:
-                                                _dashBoardModelMain!
-                                                    .data![index]
-                                                    .books![index1]
-                                                    .bookImage!,
-                                                fit: BoxFit.cover,
-                                                placeholder: (context,
-                                                    url) =>
-                                                    const Center(
-                                                        child:
-                                                        CupertinoActivityIndicator(
-                                                          color: Color(0xFF256D85),
-                                                        )),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                    const Center(child: Icon(Icons.error_outline)),
+                                            child: CachedNetworkImage(
+                                              filterQuality: FilterQuality.high,
+                                              imageBuilder: (context, imageProvider) => Container(
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  borderRadius: BorderRadius.circular(10),
+                                                  image: DecorationImage(
+                                                      image: imageProvider, fit: BoxFit.cover),
+                                                ),
                                               ),
+                                              imageUrl:
+                                              _dashBoardModelMain!
+                                                  .data![index]
+                                                  .books![index1]
+                                                  .bookImage!,
+                                              fit: BoxFit.cover,
+
+                                              placeholder: (context,
+                                                  url) =>
+                                                  const Center(
+                                                      child:
+                                                      CupertinoActivityIndicator(
+                                                        color: Color(0xFF256D85),
+                                                      )),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                  const Center(child: Icon(Icons.error_outline)),
                                             ),
                                           ),
                                           Text(
