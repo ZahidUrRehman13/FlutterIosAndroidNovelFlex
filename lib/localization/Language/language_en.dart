@@ -104,11 +104,23 @@ class LanguageEn extends Languages {
   String get terms => "TERMS & CONDITIONS";
 
   @override
-  String get published => "PUBLISHED BOOKS";
+  String get published => "My Wallet";
 
   @override
   // TODO: implement Publish
   String get Publish => "Publish";
+
+  @override
+  // TODO: implement Publish
+  String get reader => "Reader";
+
+  @override
+  // TODO: implement Publish
+  String get following => "Following";
+
+  @override
+  // TODO: implement Publish
+  String get continueReading => "Continue Reading";
 
   @override
   // TODO: implement RateusDialog

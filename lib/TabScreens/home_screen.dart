@@ -212,13 +212,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       InternetConnectionStatus.disconnected,
                   child: Constants.InternetNotConnected(_height * 0.03)),
               Container(
-                height: _height*0.26,
+                height: _height*0.24,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CarouselSlider(
                     options: CarouselOptions(
-                        enlargeCenterPage: true,
-                      autoPlay: false
+                      viewportFraction: 1,
+                      autoPlayCurve: Curves.easeInSine,
+                      autoPlay: true
                     ),
                     items:  _dashBoardModelMain!
                         .data![0].books!.map((i) {
@@ -232,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Row(
                                 children: [
                                   SizedBox(
-                                    width: _width*0.02,
+                                    width: _width*0.03,
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -251,17 +252,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Container(
                                         width: _width*0.25,
                                         height: _height*0.15,
-                                        child:ClipRRect(
+                                        decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(20),
-                                          child: Image(
-                                            image: NetworkImage(
-                                                _dashBoardModelMain!
-                                                    .data![0].books![1].bookImage.toString()),
-                                          ),
+                                          image: DecorationImage(
+                                            image: NetworkImage(_dashBoardModelMain!
+                                                .data![2].books![0].bookImage.toString(),
+                                            ),
+                                            fit: BoxFit.cover
+
+                                          )
                                         ),
                                       ),
                                       SizedBox()
                                     ],
+                                  ),
+                                  SizedBox(
+                                    width: _width*0.05,
                                   ),
                                   Expanded(
                                     child: Column(
@@ -283,18 +289,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
 
                                         ),
-                                        Text(
-                                            "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut arcu libero, pulvinar non massa sed, accumsan scelerisque dui. Morbi purus mauris, vulputate quis felis nec, fermentum aliquam orci. Quisque ornare iaculis placerat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In commodo sem arcu, sed fermentum tortor consequat vel. Phasellus lacinia quam quis leo tincidunt vehicula.",
-                                            style: const TextStyle(
-                                                color:  const Color(0xff676767),
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: "Lato",
-                                                fontStyle:  FontStyle.normal,
-                                                fontSize: 12.0
-                                            ),
+                                        Padding(
+                                          padding: context.watch<UserProvider>().SelectedLanguage=='English' ? EdgeInsets.only(right: _width*0.02):EdgeInsets.only(left: _width*0.02),
+                                          child: Text(
+                                              "Pellentesque habitant morbi tristique senectus et netus et"
+                                                  " malesuada fames ac turpis egestas. Ut arcu libero, "
+                                                  "pulvinar non massa sed, accumsan scelerisque dui. "
+                                                  "Morbi purus mauris, vulputate quis felis nec, "
+                                                  "fermentum aliquam orci."
+                                                  " Quisque ornare iaculis placerat."
+                                                  " Class aptent taciti sociosqu ad"
+                                                  " litora torquent per conubia nostra"
+                                                  ", per inceptos himenaeos. In commodo"
+                                                  " sem arcu, sed fermentum tortor "
+                                                  "consequat vel. Phasellus lacinia"
+                                                  " quam quis leo tincidunt vehicula.",
 
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 5,
+                                              style: const TextStyle(
+                                                  color:  const Color(0xff676767),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: "Lato",
+                                                  fontStyle:  FontStyle.normal,
+                                                  fontSize: 12.0
+                                              ),
+                                             textAlign: TextAlign.left,
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 5,
+                                          ),
                                         ),
                                         Text(
                                             "#Manga",
@@ -563,7 +584,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
       drawer: DrawerCode(),

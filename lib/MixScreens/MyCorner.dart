@@ -127,6 +127,10 @@ class _MyCornerState extends State<MyCorner> {
                               borderRadius: BorderRadius.all(
                                   Radius.circular(10),
                               ),
+                            image: DecorationImage(
+                              image: AssetImage("assets/bg_image.jpeg"),
+                              fit: BoxFit.cover
+                            ),
                             color: Colors.green
                           )
                       ),

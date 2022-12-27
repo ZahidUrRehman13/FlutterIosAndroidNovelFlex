@@ -83,510 +83,611 @@ class _Profile_ScreenState extends State<Profile_Screen> {
   Widget build(BuildContext context) {
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor:
-          _isLoading || _isAuthorLoading ? Colors.white : Color(0xff2d5970),
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Color(0xFF256D85),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => UploadDataScreen()));
-            },
-            child: CircleAvatar(
-              radius: _height * _width * 0.000058,
-              backgroundColor: Colors.black26,
-              child: Center(
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => UploadDataScreen()));
-                  },
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
+    return _isInternetConnected
+        ? _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xFF256D85),
                 ),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: _width * 0.03,
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Container(
-          child: _isInternetConnected
-              ? _isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(
-                        color: Color(0xFF256D85),
-                      ),
-                    )
-                  : _profileStatusModel!.data!.userType == "3"
-                      ? _isAuthorLoading
-                          ? const Center(
-                              child: CircularProgressIndicator(
-                                color: Color(0xff2d5970),
-                              ),
-                            )
-                          : Stack(
-                              children: [
-                                Positioned(
-                                    child: Container(
-                                  height: _height * 0.9,
-                                  color: Colors.white,
-                                )),
-                                Positioned(
-                                  child: Container(
-                                    height: _height * 0.175,
-                                    width: _width,
-                                    color: Color(0xFF256D85),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: _height * 0.001,
-                                  left: _width * 0.4,
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.black12,
-                                    radius: _width * _height * 0.00015,
-                                    child: Center(
-                                      child: Icon(
-                                        Icons.image,
-                                        size: _width * _height * 0.00012,
-                                        color: Colors.white54,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: _width * 0.05,
-                                  top: _height * 0.13,
-                                  child: Row(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          _getFromGallery();
-                                        },
-                                        child: _authorProfileModel!
-                                                    .data![0].img ==
-                                                ""
-                                            ? Container(
-                                                child: Icon(
-                                                  Icons.person_pin,
-                                                  size: _height *
-                                                      _width *
-                                                      0.00009,
-                                                ),
-                                              )
-                                            : Container(
-                                                height: _height * 0.13,
-                                                width: _width * 0.25,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    border: Border.all(
-                                                      width: 4,
-                                                      color: Colors.white,
-                                                    ),
-                                                    color: Color(0xFF256D85),
-                                                    image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: NetworkImage(
-                                                          _authorProfileModel!
-                                                              .data![0].img
-                                                              .toString(),
-                                                        ))),
-                                              ),
-                                      ),
-                                      SizedBox(
-                                        width: _width * 0.03,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: _height * 0.02),
-                                        child: Text(
-                                          context
-                                              .read<UserProvider>()
-                                              .UserName!,
-                                          style: const TextStyle(
-                                              color: const Color(0xff2a2a2a),
-                                              fontWeight: FontWeight.w700,
-                                              fontFamily: "Neckar",
-                                              fontStyle: FontStyle.normal,
-                                              fontSize: 14.0),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Positioned(
-                                  top: _height * 0.33,
-                                  child: Container(
-                                    height: _height * 0.3,
-                                    width: _width,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        // Our Projects
-                                        Column(
-                                          children: [
-                                            Text(
-                                                Languages.of(context)!
-                                                    .subscriber,
-                                                style: const TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  color: Colors.black54,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontStyle: FontStyle.normal,
-                                                )),
-                                            SizedBox(
-                                              height: _height * 0.03,
-                                            ),
-                                            Text(
-                                                _authorProfileModel!
-                                                    .data![0].subscribers!,
-                                                style: const TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  color: Color(0xff313131),
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontStyle: FontStyle.normal,
-                                                )),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(Languages.of(context)!.level,
-                                                style: const TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  color: Colors.black54,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontStyle: FontStyle.normal,
-                                                )),
-                                            SizedBox(
-                                              height: _height * 0.03,
-                                            ),
-                                            Text(
-                                                _authorProfileModel!
-                                                    .data![0].level!,
-                                                style: const TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  color: Color(0xff313131),
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontStyle: FontStyle.normal,
-                                                )),
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                                Languages.of(context)!
-                                                    .published,
-                                                style: const TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  color: Colors.black54,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontStyle: FontStyle.normal,
-                                                )),
-                                            SizedBox(
-                                              height: _height * 0.03,
-                                            ),
-                                            const Text("1",
-                                                style: TextStyle(
-                                                  fontFamily: 'Lato',
-                                                  color: Color(0xff313131),
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w700,
-                                                  fontStyle: FontStyle.normal,
-                                                )),
-                                          ],
-                                        )
-                                      ], //hello
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: _height * 0.48,
-                                  left: _width * 0.8,
-                                  child: Container(
-                                    height: _height * 0.3,
-                                    width: _width,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Uploadscreen()));
-                                      },
-                                      child: Text(Languages.of(context)!.seeAll,
-                                          style: const TextStyle(
-                                            fontFamily: 'Lato',
-                                            color: Colors.blue,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w700,
-                                            fontStyle: FontStyle.normal,
-                                          )),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  top: _height * 0.5,
-                                  child: _isHistoryLoading
-                                      ? Padding(
-                                          padding: EdgeInsets.only(
-                                              left: _height * _width * 0.0006,
-                                              top: _height * _width * 0.0004),
-                                          child: const Center(
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                Color(0xFF256D85),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      : _emtyFlag
-                                          ? Padding(
-                                              padding: EdgeInsets.all(
-                                                  _height * _width * 0.0004),
-                                              child: Center(
-                                                child: Text(
-                                                  Languages.of(context)!
-                                                      .nouploadhistory,
-                                                  style: const TextStyle(
-                                                      fontFamily:
-                                                          Constants.fontfamily,
-                                                      color: Colors.black54),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            )
-                                          : SizedBox(
-                                              height: _height * 0.3,
-                                              width: _width,
-                                              child: ListView.builder(
-                                                physics:
-                                                    const BouncingScrollPhysics(),
-                                                itemCount:
-                                                    _userUploadHistoryModel!
-                                                        .data!.length,
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                itemBuilder: (context, index1) {
-                                                  return GestureDetector(
-                                                    onTap: () {},
-                                                    child: Column(
-                                                      children: [
-                                                        Stack(
-                                                          children: [
-                                                            Container(
-                                                              width:
-                                                                  _width * 0.22,
-                                                              height: _height *
-                                                                  0.12,
-                                                              margin: EdgeInsets
-                                                                  .all(_width *
-                                                                      0.05),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5.0),
-                                                                color: Colors
-                                                                    .black,
-                                                                image: DecorationImage(
-                                                                    image: _userUploadHistoryModel!.data![index1].bookImage ==
-                                                                            ""
-                                                                        ? const AssetImage(
-                                                                            "assets/quotes_data/manga image.png")
-                                                                        : NetworkImage(_userUploadHistoryModel!
-                                                                            .data![index1]
-                                                                            .bookImage
-                                                                            .toString()) as ImageProvider),
-                                                              ),
-                                                            ),
-                                                            Positioned(
-                                                                top: _height *
-                                                                    0.12,
-                                                                left: _width *
-                                                                    0.07,
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .remove_red_eye,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  size: _height *
-                                                                      _width *
-                                                                      0.00005,
-                                                                )),
-                                                            Positioned(
-                                                                top: _height *
-                                                                    0.122,
-                                                                left: _width *
-                                                                    0.13,
-                                                                child: Text(
-                                                                  _userUploadHistoryModel!
-                                                                      .data![
-                                                                          index1]
-                                                                      .views
-                                                                      .toString(),
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          10.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      fontFamily:
-                                                                          "Lato",
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .normal,
-                                                                      color: Colors
-                                                                          .white),
-                                                                ))
-                                                          ],
-                                                        ),
-                                                        Text(
-                                                          _userUploadHistoryModel!
-                                                              .data![index1]
-                                                              .bookTitle
-                                                              .toString(),
-                                                          style:
-                                                              const TextStyle(
-                                                            fontFamily: 'Lato',
-                                                            color: Color(
-                                                                0xff313131),
-                                                            fontSize: 14,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            fontStyle: FontStyle
-                                                                .normal,
-                                                          ),
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                },
-                                              )),
-                                ),
-                              ],
-                            )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Visibility(
-                                visible: Provider.of<InternetConnectionStatus>(
-                                        context) ==
-                                    InternetConnectionStatus.disconnected,
-                                child: Constants.InternetNotConnected(
-                                    _height * 0.03)),
+              )
+            : _profileStatusModel!.data!.userType == "3"
+                ? _isAuthorLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xff2d5970),
+                        ),
+                      )
+                    : Scaffold(
+                        backgroundColor: _isLoading || _isAuthorLoading
+                            ? Colors.white
+                            : Color(0xff2d5970),
+                        appBar: AppBar(
+                          elevation: 0.0,
+                          backgroundColor: Color(0xFF256D85),
+                          actions: [
                             GestureDetector(
                               onTap: () {
-                                _getFromGallery();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            UploadDataScreen()));
                               },
-                              child: Container(
-                                width: _width,
-                                child: Stack(
-                                  children: [
-                                    SizedBox(
-                                      height: _height * 0.4,
-                                      child: const Center(
-                                        child: Icon(
-                                          Icons.person_pin,
-                                          size: 190,
-                                          color: Colors.white,
-                                        ),
-                                      ),
+                              child: CircleAvatar(
+                                radius: _height * _width * 0.000058,
+                                backgroundColor: Colors.black26,
+                                child: Center(
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  UploadDataScreen()));
+                                    },
+                                    icon: const Icon(
+                                      Icons.add,
+                                      color: Colors.white,
                                     ),
-                                    Positioned(
-                                      left: _width * 0.58,
-                                      top: _height * 0.22,
-                                      child: const CircleAvatar(
-                                        backgroundColor: Colors.black54,
-                                        child: Icon(
-                                          Icons.camera_alt_outlined,
-                                          color: Colors.white,
-                                          size: 30.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(30),
-                                      topRight: Radius.circular(30)),
+                            SizedBox(
+                              width: _width * 0.03,
+                            ),
+                          ],
+                        ),
+                        body: SafeArea(
+                          child: Container(
+                              child: Stack(
+                            children: [
+                              Positioned(
+                                  child: Container(
+                                height: _height * 0.9,
+                                color: Colors.white,
+                              )),
+                              Positioned(
+                                child: Container(
+                                  height: _height * 0.175,
+                                  width: _width,
+                                  color: Color(0xFF256D85),
                                 ),
-                                child: Column(
+                              ),
+                              Positioned(
+                                top: _height * 0.001,
+                                left: _width * 0.4,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.black12,
+                                  radius: _width * _height * 0.00015,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.image,
+                                      size: _width * _height * 0.00012,
+                                      color: Colors.white54,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                left: _width * 0.05,
+                                top: _height * 0.13,
+                                child: Row(
                                   children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: _height * 0.1,
-                                          left: _width * 0.02,
-                                          right: _width * 0.02),
-                                      child: Text(
-                                        context.read<UserProvider>().UserEmail!,
-                                        style: TextStyle(
-                                          fontFamily: Constants.fontfamily,
-                                        ),
-                                      ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        _getFromGallery();
+                                      },
+                                      child: _authorProfileModel!
+                                                  .data![0].img ==
+                                              ""
+                                          ? Container(
+                                              child: Icon(
+                                                Icons.person_pin,
+                                                size:
+                                                    _height * _width * 0.00009,
+                                              ),
+                                            )
+                                          : Container(
+                                              height: _height * 0.13,
+                                              width: _width * 0.25,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                    width: 4,
+                                                    color: Colors.white,
+                                                  ),
+                                                  color: Color(0xFF256D85),
+                                                  image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: NetworkImage(
+                                                        _authorProfileModel!
+                                                            .data![0].img
+                                                            .toString(),
+                                                      ))),
+                                            ),
+                                    ),
+                                    SizedBox(
+                                      width: _width * 0.03,
                                     ),
                                     Padding(
                                       padding:
-                                          EdgeInsets.only(top: _height * 0.1),
-                                      child: Visibility(
-                                          visible: _isLoading,
-                                          child: const Center(
-                                            child: CircularProgressIndicator(
-                                              color: Color(0xFF256D85),
-                                            ),
-                                          )),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                        margin:
-                                            EdgeInsets.only(top: _height * 0.1),
-                                        child: ResuableMaterialButtonSmall(
-                                          onpress: () {
-                                            showTermsAndConditionAlert();
-                                          },
-                                          buttonname: Languages.of(context)!
-                                              .MyMangaUploads,
-                                        ),
+                                          EdgeInsets.only(top: _height * 0.02),
+                                      child: Text(
+                                        context.read<UserProvider>().UserName!,
+                                        style: const TextStyle(
+                                            color: const Color(0xff2a2a2a),
+                                            fontWeight: FontWeight.w700,
+                                            fontFamily: "Neckar",
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 14.0),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            )
-                          ],
-                        )
-              : Center(
-                  child: Constants.InternetNotConnected(_height * 0.03),
-                ),
-        ),
-      ),
-    );
+                              Positioned(
+                                top: _height * 0.33,
+                                child: Container(
+                                  height: _height * 0.3,
+                                  width: _width,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      // Our Projects
+                                      Column(
+                                        children: [
+                                          Text(
+                                              Languages.of(context)!.subscriber,
+                                              style: const TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                          SizedBox(
+                                            height: _height * 0.03,
+                                          ),
+                                          Text(
+                                              _authorProfileModel!
+                                                  .data![0].subscribers!,
+                                              style: const TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Color(0xff313131),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(Languages.of(context)!.level,
+                                              style: const TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                          SizedBox(
+                                            height: _height * 0.03,
+                                          ),
+                                          Text(
+                                              _authorProfileModel!
+                                                  .data![0].level!,
+                                              style: const TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Color(0xff313131),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Text(Languages.of(context)!.published,
+                                              style: const TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Colors.black54,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                          SizedBox(
+                                            height: _height * 0.03,
+                                          ),
+                                          const Text("0 \$",
+                                              style: TextStyle(
+                                                fontFamily: 'Lato',
+                                                color: Color(0xff313131),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.normal,
+                                              )),
+                                        ],
+                                      )
+                                    ], //hello
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: _height * 0.48,
+                                left: _width * 0.8,
+                                child: Container(
+                                  height: _height * 0.3,
+                                  width: _width,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Uploadscreen()));
+                                    },
+                                    child: Text(Languages.of(context)!.seeAll,
+                                        style: const TextStyle(
+                                          fontFamily: 'Lato',
+                                          color: Colors.blue,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.normal,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: _height * 0.5,
+                                child: _isHistoryLoading
+                                    ? Padding(
+                                        padding: EdgeInsets.only(
+                                            left: _height * _width * 0.0006,
+                                            top: _height * _width * 0.0004),
+                                        child: const Center(
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              Color(0xFF256D85),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : _emtyFlag
+                                        ? Padding(
+                                            padding: EdgeInsets.all(
+                                                _height * _width * 0.0004),
+                                            child: Center(
+                                              child: Text(
+                                                Languages.of(context)!
+                                                    .nouploadhistory,
+                                                style: const TextStyle(
+                                                    fontFamily:
+                                                        Constants.fontfamily,
+                                                    color: Colors.black54),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          )
+                                        : SizedBox(
+                                            height: _height * 0.3,
+                                            width: _width,
+                                            child: ListView.builder(
+                                              physics:
+                                                  const BouncingScrollPhysics(),
+                                              itemCount:
+                                                  _userUploadHistoryModel!
+                                                      .data!.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (context, index1) {
+                                                return GestureDetector(
+                                                  onTap: () {},
+                                                  child: Column(
+                                                    children: [
+                                                      Stack(
+                                                        children: [
+                                                          Container(
+                                                            width:
+                                                                _width * 0.22,
+                                                            height:
+                                                                _height * 0.12,
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    _width *
+                                                                        0.05),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5.0),
+                                                              color:
+                                                                  Colors.black,
+                                                              image: DecorationImage(
+                                                                  image: _userUploadHistoryModel!
+                                                                              .data![
+                                                                                  index1]
+                                                                              .bookImage ==
+                                                                          ""
+                                                                      ? const AssetImage(
+                                                                          "assets/quotes_data/manga image.png")
+                                                                      : NetworkImage(_userUploadHistoryModel!
+                                                                          .data![
+                                                                              index1]
+                                                                          .bookImage
+                                                                          .toString()) as ImageProvider),
+                                                            ),
+                                                          ),
+                                                          Positioned(
+                                                              top: _height *
+                                                                  0.12,
+                                                              left:
+                                                                  _width * 0.07,
+                                                              child: Icon(
+                                                                Icons
+                                                                    .remove_red_eye,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: _height *
+                                                                    _width *
+                                                                    0.00005,
+                                                              )),
+                                                          Positioned(
+                                                              top: _height *
+                                                                  0.122,
+                                                              left:
+                                                                  _width * 0.13,
+                                                              child: Text(
+                                                                _userUploadHistoryModel!
+                                                                    .data![
+                                                                        index1]
+                                                                    .views
+                                                                    .toString(),
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        "Lato",
+                                                                    fontStyle:
+                                                                        FontStyle
+                                                                            .normal,
+                                                                    color: Colors
+                                                                        .white),
+                                                              ))
+                                                        ],
+                                                      ),
+                                                      Text(
+                                                        _userUploadHistoryModel!
+                                                            .data![index1]
+                                                            .bookTitle
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                          fontFamily: 'Lato',
+                                                          color:
+                                                              Color(0xff313131),
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          fontStyle:
+                                                              FontStyle.normal,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            )),
+                              ),
+                            ],
+                          )),
+                        ),
+                      )
+                : Scaffold(
+                    backgroundColor: const Color(0xffebf5f9),
+                    body: Stack(
+                      children: [
+                        Positioned(
+                          top: 0.0,
+                          left: 0.0,
+                          child: Opacity(
+                            opacity: 0.8799999952316284,
+                            child: Container(
+                                width: _width,
+                                height: _height * 0.2,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xff3a6c83))),
+                          ),
+                        ),
+                        Positioned(
+                            top: _height * 0.1,
+                            left: _width * 0.35,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                    width: _width * 0.3,
+                                    height: _height * 0.2,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: const Color(0xff3a6c83),
+                                            width: 1))),
+                                Text("Tom Schneider",
+                                    style: const TextStyle(
+                                        color: const Color(0xff2a2a2a),
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "Neckar",
+                                        fontStyle: FontStyle.normal,
+                                        fontSize: 14.0),
+                                    textAlign: TextAlign.left),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Image.asset(
+                                      "assets/quotes_data/extra_pngs/glasses.png",
+                                      color: const Color(0xff002333),
+                                      height: _height * 0.03,
+                                      width: _width * 0.03,
+                                    ),
+                                    SizedBox(
+                                      width: _width * 0.01,
+                                    ),
+                                    Text(Languages.of(context)!.reader,
+                                        style: const TextStyle(
+                                            color: const Color(0xff3a6c83),
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "Lato",
+                                            fontStyle: FontStyle.normal,
+                                            fontSize: 12.0),
+                                        textAlign: TextAlign.left)
+                                  ],
+                                )
+                              ],
+                            )),
+                        Positioned(
+                            top: _height * 0.37,
+                            left: _width * 0.1,
+                            right: _width * 0.1,
+                            child: Opacity(
+                              opacity: 0.20000000298023224,
+                              child: Container(
+                                  width: 368,
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xff3a6c83))),
+                            )),
+                        Positioned(
+                            top: _height * 0.4,
+                            left: _width * 0.06,
+                            right: _width * 0.06,
+                            child: Text(Languages.of(context)!.following,
+                                style: const TextStyle(
+                                    color: const Color(0xff2a2a2a),
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Alexandria",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16.0),
+                                textAlign: TextAlign.left)),
+                        Positioned(
+                          top: _height * 0.42,
+                          child: SizedBox(
+                              height: _height * 0.2,
+                              width: _width,
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: 10,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index1) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.only(left: _width * 0.1),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Container(
+                                            width: _width * 0.2,
+                                            height: _height * 0.1,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    color:
+                                                        const Color(0xff3a6c83),
+                                                    width: 1))),
+                                        Text("Matthew Banks",
+                                            style: const TextStyle(
+                                                color: const Color(0xff2a2a2a),
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: "Lato",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.center),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              )),
+                        ),
+                        Positioned(
+                            top: _height * 0.64,
+                            left: _width * 0.1,
+                            right: _width * 0.1,
+                            child: Opacity(
+                              opacity: 0.20000000298023224,
+                              child: Container(
+                                  width: 368,
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xff3a6c83))),
+                            )),
+                        Positioned(
+                            top: _height * 0.67,
+                            left: _width * 0.06,
+                            right: _width * 0.06,
+                            child: Text(Languages.of(context)!.continueReading,
+                                style: const TextStyle(
+                                    color: const Color(0xff2a2a2a),
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "Alexandria",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16.0),
+                                textAlign: TextAlign.left)),
+                        Positioned(
+                          top: _height * 0.7,
+                          child: SizedBox(
+                              height: _height * 0.2,
+                              width: _width,
+                              child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: 10,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index1) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.only(left: _width * 0.1),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Container(
+                                            width: _width * 0.26,
+                                            height: _height * 0.12,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(10),
+                                                ),
+                                                border: Border.all(
+                                                    color:
+                                                        const Color(0xff3a6c83),
+                                                    width: 1))),
+                                        Text("Matthew Banks",
+                                            style: const TextStyle(
+                                                color: const Color(0xff2a2a2a),
+                                                fontWeight: FontWeight.w700,
+                                                fontFamily: "Lato",
+                                                fontStyle: FontStyle.normal,
+                                                fontSize: 12.0),
+                                            textAlign: TextAlign.center),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              )),
+                        ),
+                      ],
+                    ),
+                  )
+        : Center(
+            child: Constants.InternetNotConnected(_height * 0.03),
+          );
   }
 
   Future<void> UploadProfileImageApi() async {

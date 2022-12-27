@@ -90,6 +90,12 @@ abstract class Languages {
 
   String get subscriber;
 
+  String get reader;
+
+  String get following;
+
+  String get continueReading;
+
   String get RateusDialog;
 
   String get submitDialog;

@@ -187,15 +187,16 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     ),
                   )
                 : Container(
-          height: _height*0.7,
+          height: _height*0.9,
           decoration: BoxDecoration(
             color:  Colors.white,
             image: DecorationImage(
+              alignment: Alignment.topCenter,
                 image: NetworkImage(
                   _bookDetailsModel!.data!.bookImage!,
 
                 ),
-                fit: BoxFit.cover,
+                // fit: BoxFit.cover,
             ),
           ),
              child: ListView(

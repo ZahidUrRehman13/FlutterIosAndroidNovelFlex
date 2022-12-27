@@ -102,10 +102,23 @@ class LanguageAr extends Languages {
   // TODO: implement MyMangaUploads
   String get terms => "البنود و الظروف";
   @override
-  String get published => "الكتب المنشورة";
+  String get published => "محفظتى";
 
   @override
   String get authorC => "نشر الكتب";
+
+
+  @override
+  // TODO: implement Publish
+  String get reader => "قارئ";
+
+  @override
+  // TODO: implement Publish
+  String get following => "التالي";
+
+  @override
+  // TODO: implement Publish
+  String get continueReading => "أكمل القراءة";
 
 
   @override
